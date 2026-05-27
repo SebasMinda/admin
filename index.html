@@ -368,7 +368,29 @@
   <section class="cta" id="contacto">
     <h2>¿Tienes un parqueadero?</h2>
     <p>Registra tu espacio en One Spot y conecta con más conductores en Quito.</p>
-    <button>Registrar parqueadero</button>
+    <button onclick="irAlFormulario()">Registrar parqueadero</button>
+  </section>
+
+  <section class="section" id="formulario-registro">
+    <h2>Formulario de registro</h2>
+    <p class="intro">
+      Completa los datos principales de tu parqueadero para que One Spot pueda evaluarlo y mostrarlo en la plataforma.
+    </p>
+
+    <form class="search-box" id="parkingForm">
+      <input type="text" id="nombreParqueadero" placeholder="Nombre del parqueadero" required />
+      <input type="text" id="direccionParqueadero" placeholder="Dirección o zona" required />
+      <input type="text" id="horarioParqueadero" placeholder="Horario de atención" required />
+      <input type="number" id="precioParqueadero" placeholder="Precio por hora" min="0" step="0.01" required />
+      <select id="tipoParqueadero" required>
+        <option value="">Tipo de parqueadero</option>
+        <option value="Cubierto">Cubierto</option>
+        <option value="Al aire libre">Al aire libre</option>
+        <option value="24 horas">24 horas</option>
+      </select>
+      <button type="submit">Enviar información</button>
+      <p id="mensajeFormulario" style="margin-top: 15px; color: #166534; font-weight: bold;"></p>
+    </form>
   </section>
 
   <footer>
@@ -420,6 +442,29 @@
       setTimeout(() => {
         map.invalidateSize();
       }, 300);
+    });
+
+    function irAlFormulario() {
+      document.getElementById('formulario-registro').scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
+
+    document.getElementById('parkingForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const mensaje = document.getElementById('mensajeFormulario');
+      mensaje.textContent = 'Información enviada correctamente. Gracias por registrar tu parqueadero.';
+
+      this.reset();
+
+      setTimeout(() => {
+        mensaje.textContent = '';
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }, 2500);
     });
   </script>
 </body>
