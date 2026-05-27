@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>One Spot | Encuentra parqueadero en Quito</title>
+  <title>One Spot | Parqueaderos en Quito</title>
+
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
   <style>
     * {
       margin: 0;
@@ -31,7 +33,7 @@
     }
 
     .logo {
-      font-size: 26px;
+      font-size: 28px;
       font-weight: bold;
       color: #38bdf8;
     }
@@ -48,18 +50,18 @@
     }
 
     .hero {
-      min-height: 520px;
-      padding: 70px 8%;
+      min-height: 560px;
+      padding: 80px 8%;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      gap: 45px;
       align-items: center;
-      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
       color: white;
     }
 
     .hero h1 {
-      font-size: 48px;
+      font-size: 50px;
       line-height: 1.1;
       margin-bottom: 20px;
     }
@@ -67,25 +69,24 @@
     .hero p {
       font-size: 18px;
       color: #dbeafe;
-      margin-bottom: 30px;
       line-height: 1.6;
+      margin-bottom: 30px;
     }
 
     .search-box {
       background: white;
-      padding: 24px;
-      border-radius: 18px;
+      padding: 26px;
+      border-radius: 20px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.25);
       color: #1f2937;
     }
 
     .search-box h2 {
+      font-size: 25px;
       margin-bottom: 18px;
-      font-size: 24px;
     }
 
-    .search-box input,
-    .search-box select {
+    input, select {
       width: 100%;
       padding: 14px;
       margin-bottom: 14px;
@@ -94,36 +95,39 @@
       font-size: 15px;
     }
 
-    .search-box button {
-      width: 100%;
-      padding: 15px;
+    button {
+      padding: 15px 24px;
       border: none;
-      border-radius: 10px;
-      background: #0284c7;
-      color: white;
+      border-radius: 12px;
+      background: #38bdf8;
+      color: #0f172a;
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
     }
 
-    .search-box button:hover {
-      background: #0369a1;
+    button:hover {
+      background: #0ea5e9;
+    }
+
+    .search-box button {
+      width: 100%;
     }
 
     .section {
-      padding: 65px 8%;
+      padding: 70px 8%;
     }
 
     .section h2 {
-      font-size: 34px;
-      margin-bottom: 12px;
+      font-size: 36px;
       color: #0f172a;
+      margin-bottom: 12px;
     }
 
-    .section .intro {
+    .intro {
       color: #475569;
       margin-bottom: 35px;
-      max-width: 760px;
+      max-width: 780px;
       line-height: 1.6;
     }
 
@@ -135,8 +139,8 @@
 
     .card {
       background: white;
-      padding: 24px;
-      border-radius: 16px;
+      padding: 26px;
+      border-radius: 18px;
       box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
     }
 
@@ -154,29 +158,25 @@
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
       gap: 25px;
+      align-items: start;
     }
 
     .map-box {
-      min-height: 420px;
+      height: 460px;
       border-radius: 18px;
       overflow: hidden;
       box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      background: white;
     }
 
     #map {
       width: 100%;
       height: 100%;
-      min-height: 420px;
-      border-radius: 18px;
       z-index: 1;
     }
 
     .leaflet-container {
       z-index: 1;
-    }
-
-    .leaflet-control-container {
-      z-index: 2;
     }
 
     .parking-list {
@@ -187,14 +187,14 @@
 
     .parking-item {
       background: white;
-      border-radius: 15px;
-      padding: 18px;
+      border-radius: 16px;
+      padding: 20px;
       box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
     }
 
     .parking-item h3 {
-      margin-bottom: 8px;
       color: #0f172a;
+      margin-bottom: 10px;
     }
 
     .parking-item p {
@@ -207,7 +207,7 @@
       display: inline-block;
       background: #dcfce7;
       color: #166534;
-      padding: 6px 10px;
+      padding: 6px 12px;
       border-radius: 20px;
       font-size: 13px;
       margin-top: 8px;
@@ -217,27 +217,17 @@
       background: #0f172a;
       color: white;
       text-align: center;
-      padding: 70px 8%;
+      padding: 75px 8%;
     }
 
     .cta h2 {
-      font-size: 34px;
+      font-size: 36px;
       margin-bottom: 15px;
     }
 
     .cta p {
       color: #cbd5e1;
       margin-bottom: 25px;
-    }
-
-    .cta button {
-      background: #38bdf8;
-      color: #0f172a;
-      border: none;
-      padding: 14px 28px;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
     }
 
     footer {
@@ -265,7 +255,9 @@
     }
   </style>
 </head>
+
 <body>
+
   <header>
     <div class="logo">One Spot</div>
     <nav>
@@ -288,19 +280,24 @@
     <div class="search-box">
       <h2>Busca tu parqueadero</h2>
       <input type="text" placeholder="Ingresa una zona, dirección o lugar" />
+
       <select>
         <option>Tipo de parqueadero</option>
         <option>Cubierto</option>
         <option>Al aire libre</option>
         <option>24 horas</option>
       </select>
+
       <select>
         <option>Filtrar por precio</option>
         <option>Menos de $1 por hora</option>
         <option>$1 - $2 por hora</option>
         <option>Más de $2 por hora</option>
       </select>
-      <button>Buscar ahora</button>
+
+      <button onclick="document.getElementById('parqueaderos').scrollIntoView({behavior:'smooth'})">
+        Buscar ahora
+      </button>
     </div>
   </section>
 
@@ -313,15 +310,17 @@
     <div class="cards">
       <div class="card">
         <h3>Búsqueda por ubicación</h3>
-        <p>Permite encontrar parqueaderos cercanos según la zona, dirección o punto de interés.</p>
+        <p>Encuentra parqueaderos cercanos según la zona, dirección o punto de interés.</p>
       </div>
+
       <div class="card">
         <h3>Información clara</h3>
-        <p>Muestra precios, horarios, métodos de pago y características importantes del lugar.</p>
+        <p>Consulta precios, horarios, métodos de pago y características importantes.</p>
       </div>
+
       <div class="card">
         <h3>Filtros rápidos</h3>
-        <p>Ayuda a elegir parqueaderos cubiertos, económicos, seguros o disponibles las 24 horas.</p>
+        <p>Elige parqueaderos cubiertos, económicos, seguros o disponibles las 24 horas.</p>
       </div>
     </div>
   </section>
@@ -329,7 +328,7 @@
   <section class="section" id="parqueaderos">
     <h2>Parqueaderos disponibles</h2>
     <p class="intro">
-      Esta sección simula cómo se vería el listado de parqueaderos conectado a un mapa. Luego puede integrarse con Google Maps, OpenStreetMap o una base de datos real.
+      Visualiza parqueaderos de Quito en el mapa y revisa información básica como precio, horario y disponibilidad.
     </p>
 
     <div class="parking-layout">
@@ -368,35 +367,17 @@
   <section class="cta" id="contacto">
     <h2>¿Tienes un parqueadero?</h2>
     <p>Registra tu espacio en One Spot y conecta con más conductores en Quito.</p>
-    <button onclick="irAlFormulario()">Registrar parqueadero</button>
-  </section>
-
-  <section class="section" id="formulario-registro">
-    <h2>Formulario de registro</h2>
-    <p class="intro">
-      Completa los datos principales de tu parqueadero para que One Spot pueda evaluarlo y mostrarlo en la plataforma.
-    </p>
-
-    <form class="search-box" id="parkingForm">
-      <input type="text" id="nombreParqueadero" placeholder="Nombre del parqueadero" required />
-      <input type="text" id="direccionParqueadero" placeholder="Dirección o zona" required />
-      <input type="text" id="horarioParqueadero" placeholder="Horario de atención" required />
-      <input type="number" id="precioParqueadero" placeholder="Precio por hora" min="0" step="0.01" required />
-      <select id="tipoParqueadero" required>
-        <option value="">Tipo de parqueadero</option>
-        <option value="Cubierto">Cubierto</option>
-        <option value="Al aire libre">Al aire libre</option>
-        <option value="24 horas">24 horas</option>
-      </select>
-      <button type="submit">Enviar información</button>
-      <p id="mensajeFormulario" style="margin-top: 15px; color: #166534; font-weight: bold;"></p>
-    </form>
+    <button onclick="window.location.href='registro.html'">
+      Registrar parqueadero
+    </button>
   </section>
 
   <footer>
-    © 2026 One Spot. Plataforma web para búsqueda de parqueaderos.
+    © 2026 One Spot. Plataforma web para búsqueda de parqueaderos en Quito.
   </footer>
+
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
   <script>
     const map = L.map('map', {
       zoomControl: true,
@@ -443,30 +424,7 @@
         map.invalidateSize();
       }, 300);
     });
-
-    function irAlFormulario() {
-      document.getElementById('formulario-registro').scrollIntoView({
-        behavior: 'smooth'
-      });
-    }
-
-    document.getElementById('parkingForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      const mensaje = document.getElementById('mensajeFormulario');
-      mensaje.textContent = 'Información enviada correctamente. Gracias por registrar tu parqueadero.';
-
-      this.reset();
-
-      setTimeout(() => {
-        mensaje.textContent = '';
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      }, 2500);
-    });
   </script>
+
 </body>
 </html>
-
