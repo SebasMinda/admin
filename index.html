@@ -23,13 +23,27 @@
     header {
       background: #0f172a;
       color: white;
-      padding: 18px 8%;
+      padding: 14px 8%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       position: sticky;
       top: 0;
       z-index: 2000;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      border-radius: 14px;
     }
 
     .logo {
@@ -104,10 +118,12 @@
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
+      transition: 0.2s;
     }
 
     button:hover {
       background: #0ea5e9;
+      transform: translateY(-1px);
     }
 
     .search-box button {
@@ -259,7 +275,11 @@
 <body>
 
   <header>
-    <div class="logo">One Spot</div>
+    <div class="logo-container">
+      <img src="logo.png" alt="Logo de One Spot" class="logo-img">
+      <div class="logo">One Spot</div>
+    </div>
+
     <nav>
       <a href="#buscar">Buscar</a>
       <a href="#funciones">Funciones</a>

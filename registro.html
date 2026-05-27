@@ -1,216 +1,211 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Registro de Parqueadero | One Spot</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, Helvetica, sans-serif;
-    }
-
-    body {
-      background: #f5f7fb;
-      color: #1f2937;
-    }
-
-    header {
-      background: #0f172a;
-      color: white;
-      padding: 18px 8%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo {
-      font-size: 28px;
-      font-weight: bold;
-      color: #38bdf8;
-    }
-
-    header a {
-      color: white;
-      text-decoration: none;
-      font-size: 15px;
-    }
-
-    header a:hover {
-      color: #38bdf8;
-    }
-
-    .container {
-      max-width: 760px;
-      margin: 55px auto;
-      background: white;
-      padding: 40px;
-      border-radius: 22px;
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
-    }
-
-    h1 {
-      text-align: center;
-      color: #0f172a;
-      font-size: 34px;
-      margin-bottom: 10px;
-    }
-
-    .intro {
-      text-align: center;
-      color: #475569;
-      margin-bottom: 30px;
-      line-height: 1.5;
-    }
-
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 6px;
-      color: #334155;
-    }
-
-    input, select, textarea {
-      width: 100%;
-      padding: 14px;
-      margin-bottom: 18px;
-      border: 1px solid #cbd5e1;
-      border-radius: 10px;
-      font-size: 15px;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    button {
-      width: 100%;
-      padding: 15px;
-      border: none;
-      border-radius: 12px;
-      background: #38bdf8;
-      color: #0f172a;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #0ea5e9;
-    }
-
-    .mensaje {
-      display: none;
-      margin-top: 20px;
-      padding: 16px;
-      background: #dcfce7;
-      color: #166534;
-      border-radius: 12px;
-      text-align: center;
-      font-weight: bold;
-    }
-
-    footer {
-      background: #020617;
-      color: #94a3b8;
-      text-align: center;
-      padding: 22px;
-      font-size: 14px;
-      margin-top: 50px;
-    }
-
-    @media (max-width: 800px) {
-      .container {
-        margin: 30px 20px;
-        padding: 28px;
-      }
-
-      h1 {
-        font-size: 28px;
-      }
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Registro de Parqueadero | One Spot</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: Arial, Helvetica, sans-serif;
+}
+body {
+background: #f5f7fb;
+color: #1f2937;
+}
+header {
+background: #0f172a;
+color: white;
+padding: 14px 8%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+box-shadow: 0 4px 18px rgba(0, 0, 0, 0.18);
+}
+.logo-container {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+.logo-img {
+width: 52px;
+height: 52px;
+object-fit: contain;
+border-radius: 14px;
+}
+.logo {
+font-size: 28px;
+font-weight: bold;
+color: #38bdf8;
+}
+header a {
+color: white;
+text-decoration: none;
+font-size: 15px;
+}
+header a:hover {
+color: #38bdf8;
+}
+.hero-form {
+background: linear-gradient(135deg, #0f172a, #1e3a8a);
+color: white;
+text-align: center;
+padding: 55px 8%;
+}
+.hero-form h1 {
+font-size: 38px;
+margin-bottom: 12px;
+}
+.hero-form p {
+color: #dbeafe;
+max-width: 720px;
+margin: auto;
+line-height: 1.6;
+}
+.container {
+max-width: 780px;
+margin: 55px auto;
+background: white;
+padding: 42px;
+border-radius: 22px;
+box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+}
+label {
+display: block;
+font-weight: bold;
+margin-bottom: 6px;
+color: #334155;
+}
+input, select, textarea {
+width: 100%;
+padding: 14px;
+margin-bottom: 18px;
+border: 1px solid #cbd5e1;
+border-radius: 10px;
+font-size: 15px;
+}
+textarea {
+resize: vertical;
+min-height: 100px;
+}
+button {
+width: 100%;
+padding: 15px;
+border: none;
+border-radius: 12px;
+background: #38bdf8;
+color: #0f172a;
+font-size: 16px;
+font-weight: bold;
+cursor: pointer;
+transition: 0.2s;
+}
+button:hover {
+background: #0ea5e9;
+transform: translateY(-1px);
+}
+.mensaje {
+display: none;
+margin-top: 20px;
+padding: 16px;
+background: #dcfce7;
+color: #166534;
+border-radius: 12px;
+text-align: center;
+font-weight: bold;
+}
+footer {
+background: #020617;
+color: #94a3b8;
+text-align: center;
+padding: 22px;
+font-size: 14px;
+margin-top: 50px;
+}
+@media (max-width: 800px) {
+header {
+flex-direction: column;
+gap: 12px;
+}
+.container {
+margin: 30px 20px;
+padding: 28px;
+}
+.hero-form h1 {
+font-size: 30px;
+}
+}
+</style>
 </head>
-
 <body>
-
-  <header>
-    <div class="logo">One Spot</div>
-    <a href="index.html">Volver al inicio</a>
-  </header>
-
-  <main class="container">
-    <h1>Registrar Parqueadero</h1>
-    <p class="intro">
-      Completa la información principal de tu parqueadero para que One Spot pueda evaluarlo y mostrarlo en la plataforma.
-    </p>
-
-    <form id="registroForm">
-      <label>Nombre del parqueadero</label>
-      <input type="text" placeholder="Ejemplo: Parqueadero La Carolina" required />
-
-      <label>Dirección o zona</label>
-      <input type="text" placeholder="Ejemplo: Av. República y Naciones Unidas" required />
-
-      <label>Horario de atención</label>
-      <input type="text" placeholder="Ejemplo: 07:00 - 22:00" required />
-
-      <label>Precio por hora</label>
-      <input type="number" placeholder="Ejemplo: 1.50" min="0" step="0.01" required />
-
-      <label>Tipo de parqueadero</label>
-      <select required>
-        <option value="">Selecciona una opción</option>
-        <option>Cubierto</option>
-        <option>Al aire libre</option>
-        <option>24 horas</option>
-        <option>Privado</option>
-        <option>Público</option>
-      </select>
-
-      <label>Nombre del encargado</label>
-      <input type="text" placeholder="Ejemplo: Carlos Pérez" required />
-
-      <label>Correo de contacto</label>
-      <input type="email" placeholder="Ejemplo: contacto@correo.com" required />
-
-      <label>Teléfono</label>
-      <input type="tel" placeholder="Ejemplo: 0999999999" required />
-
-      <label>Información adicional</label>
-      <textarea placeholder="Ejemplo: cuenta con cámaras, guardia, pago en efectivo o transferencia"></textarea>
-
-      <button type="submit">Enviar información</button>
-
-      <div class="mensaje" id="mensaje">
-        Información enviada correctamente. Volviendo al inicio...
-      </div>
-    </form>
-  </main>
-
-  <footer>
-    © 2026 One Spot. Registro de parqueaderos.
-  </footer>
-
-  <script>
-    const formulario = document.getElementById("registroForm");
-    const mensaje = document.getElementById("mensaje");
-
-    formulario.addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      mensaje.style.display = "block";
-      formulario.reset();
-
-      setTimeout(function() {
-        window.location.href = "index.html";
-      }, 2500);
-    });
-  </script>
-
+<header>
+<div class="logo-container">
+<img src="logo.png" alt="Logo de One Spot" class="logo-img">
+<div class="logo">One Spot</div>
+</div>
+<a href="index.html">Volver al inicio</a>
+</header>
+<section class="hero-form">
+<h1>Registrar Parqueadero</h1>
+<p>
+ Completa la información principal de tu parqueadero para que One Spot
+pueda evaluarlo y mostrarlo como una opción disponible para los conductores de Quito.
+</p>
+</section>
+<main class="container">
+<form id="registroForm">
+<label>Nombre del parqueadero</label>
+<input type="text" placeholder="Ejemplo: Parqueadero La Carolina"
+required />
+<label>Dirección o zona</label>
+<input type="text" placeholder="Ejemplo: Av. República y Naciones
+Unidas" required />
+<label>Horario de atención</label>
+<input type="text" placeholder="Ejemplo: 07:00 - 22:00" required />
+<label>Precio por hora</label>
+<input type="number" placeholder="Ejemplo: 1.50" min="0" step="0.01"
+required />
+<label>Tipo de parqueadero</label>
+<select required>
+<option value="">Selecciona una opción</option>
+<option>Cubierto</option>
+<option>Al aire libre</option>
+<option>24 horas</option>
+<option>Privado</option>
+<option>Público</option>
+</select>
+<label>Nombre del encargado</label>
+<input type="text" placeholder="Ejemplo: Carlos Pérez" required />
+<label>Correo de contacto</label>
+<input type="email" placeholder="Ejemplo: contacto@correo.com"
+required />
+<label>Teléfono</label>
+<input type="tel" placeholder="Ejemplo: 0999999999" required />
+<label>Información adicional</label>
+<textarea placeholder="Ejemplo: cuenta con cámaras, guardia, pago en
+efectivo o transferencia"></textarea>
+<button type="submit">Enviar información</button>
+<div class="mensaje" id="mensaje">
+ Información enviada correctamente. Volviendo al inicio...
+</div>
+</form>
+</main>
+<footer>
+ © 2026 One Spot. Registro de parqueaderos.
+</footer>
+<script>
+const formulario = document.getElementById("registroForm");
+const mensaje = document.getElementById("mensaje");
+formulario.addEventListener("submit", function(event) {
+event.preventDefault();
+mensaje.style.display = "block";
+formulario.reset();
+setTimeout(function() {
+window.location.href = "index.html";
+}, 2500);
+});
+</script>
 </body>
 </html>
