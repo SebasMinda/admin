@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>One Spot | Encuentra parqueadero en Quito</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #f5f7fb;
+      color: #1f2937;
+    }
+
+    header {
+      background: #0f172a;
+      color: white;
+      padding: 18px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 2000;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #38bdf8;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 24px;
+      font-size: 15px;
+    }
+
+    nav a:hover {
+      color: #38bdf8;
+    }
+
+    .hero {
+      min-height: 520px;
+      padding: 70px 8%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #dbeafe;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .search-box {
+      background: white;
+      padding: 24px;
+      border-radius: 18px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+      color: #1f2937;
+    }
+
+    .search-box h2 {
+      margin-bottom: 18px;
+      font-size: 24px;
+    }
+
+    .search-box input,
+    .search-box select {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 14px;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
+    .search-box button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: #0284c7;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .search-box button:hover {
+      background: #0369a1;
+    }
+
+    .section {
+      padding: 65px 8%;
+    }
+
+    .section h2 {
+      font-size: 34px;
+      margin-bottom: 12px;
+      color: #0f172a;
+    }
+
+    .section .intro {
+      color: #475569;
+      margin-bottom: 35px;
+      max-width: 760px;
+      line-height: 1.6;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .card {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    .card h3 {
+      color: #0369a1;
+      margin-bottom: 12px;
+    }
+
+    .card p {
+      color: #475569;
+      line-height: 1.5;
+    }
+
+    .parking-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 25px;
+    }
+
+    .map-box {
+      min-height: 420px;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    }
+
+    #map {
+      width: 100%;
+      height: 100%;
+      min-height: 420px;
+      border-radius: 18px;
+      z-index: 1;
+    }
+
+    .leaflet-container {
+      z-index: 1;
+    }
+
+    .leaflet-control-container {
+      z-index: 2;
+    }
+
+    .parking-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .parking-item {
+      background: white;
+      border-radius: 15px;
+      padding: 18px;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+    }
+
+    .parking-item h3 {
+      margin-bottom: 8px;
+      color: #0f172a;
+    }
+
+    .parking-item p {
+      color: #475569;
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: #dcfce7;
+      color: #166534;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+    .cta {
+      background: #0f172a;
+      color: white;
+      text-align: center;
+      padding: 70px 8%;
+    }
+
+    .cta h2 {
+      font-size: 34px;
+      margin-bottom: 15px;
+    }
+
+    .cta p {
+      color: #cbd5e1;
+      margin-bottom: 25px;
+    }
+
+    .cta button {
+      background: #38bdf8;
+      color: #0f172a;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    footer {
+      background: #020617;
+      color: #94a3b8;
+      text-align: center;
+      padding: 22px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .parking-layout,
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 38px;
+      }
+
+      nav {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">One Spot</div>
+    <nav>
+      <a href="#buscar">Buscar</a>
+      <a href="#funciones">Funciones</a>
+      <a href="#parqueaderos">Parqueaderos</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="buscar">
+    <div>
+      <h1>Encuentra parqueadero rápido en Quito</h1>
+      <p>
+        One Spot ayuda a los conductores a encontrar espacios de estacionamiento disponibles,
+        comparar precios y llegar al parqueadero más conveniente sin perder tiempo.
+      </p>
+    </div>
+
+    <div class="search-box">
+      <h2>Busca tu parqueadero</h2>
+      <input type="text" placeholder="Ingresa una zona, dirección o lugar" />
+      <select>
+        <option>Tipo de parqueadero</option>
+        <option>Cubierto</option>
+        <option>Al aire libre</option>
+        <option>24 horas</option>
+      </select>
+      <select>
+        <option>Filtrar por precio</option>
+        <option>Menos de $1 por hora</option>
+        <option>$1 - $2 por hora</option>
+        <option>Más de $2 por hora</option>
+      </select>
+      <button>Buscar ahora</button>
+    </div>
+  </section>
+
+  <section class="section" id="funciones">
+    <h2>¿Qué ofrece One Spot?</h2>
+    <p class="intro">
+      La plataforma está pensada para reducir el estrés de buscar parqueadero y mejorar la experiencia de movilidad urbana.
+    </p>
+
+    <div class="cards">
+      <div class="card">
+        <h3>Búsqueda por ubicación</h3>
+        <p>Permite encontrar parqueaderos cercanos según la zona, dirección o punto de interés.</p>
+      </div>
+      <div class="card">
+        <h3>Información clara</h3>
+        <p>Muestra precios, horarios, métodos de pago y características importantes del lugar.</p>
+      </div>
+      <div class="card">
+        <h3>Filtros rápidos</h3>
+        <p>Ayuda a elegir parqueaderos cubiertos, económicos, seguros o disponibles las 24 horas.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="parqueaderos">
+    <h2>Parqueaderos disponibles</h2>
+    <p class="intro">
+      Esta sección simula cómo se vería el listado de parqueaderos conectado a un mapa. Luego puede integrarse con Google Maps, OpenStreetMap o una base de datos real.
+    </p>
+
+    <div class="parking-layout">
+      <div class="map-box">
+        <div id="map"></div>
+      </div>
+
+      <div class="parking-list">
+        <div class="parking-item">
+          <h3>One Spot La Carolina</h3>
+          <p><strong>Dirección:</strong> Av. República y Naciones Unidas</p>
+          <p><strong>Precio:</strong> $1.00 por hora</p>
+          <p><strong>Horario:</strong> 07:00 - 22:00</p>
+          <span class="tag">Disponible</span>
+        </div>
+
+        <div class="parking-item">
+          <h3>One Spot Iñaquito</h3>
+          <p><strong>Dirección:</strong> Cerca del CCI</p>
+          <p><strong>Precio:</strong> $1.50 por hora</p>
+          <p><strong>Horario:</strong> 24 horas</p>
+          <span class="tag">Disponible</span>
+        </div>
+
+        <div class="parking-item">
+          <h3>One Spot Centro Norte</h3>
+          <p><strong>Dirección:</strong> Av. Amazonas</p>
+          <p><strong>Precio:</strong> $1.20 por hora</p>
+          <p><strong>Horario:</strong> 08:00 - 21:00</p>
+          <span class="tag">Pocos espacios</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contacto">
+    <h2>¿Tienes un parqueadero?</h2>
+    <p>Registra tu espacio en One Spot y conecta con más conductores en Quito.</p>
+    <button>Registrar parqueadero</button>
+  </section>
+
+  <footer>
+    © 2026 One Spot. Plataforma web para búsqueda de parqueaderos.
+  </footer>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    const map = L.map('map', {
+      zoomControl: true,
+      scrollWheelZoom: false
+    }).setView([-0.1807, -78.4678], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    const parqueaderos = [
+      {
+        nombre: 'One Spot La Carolina',
+        ubicacion: [-0.1817, -78.4844],
+        precio: '$1.00 por hora',
+        horario: '07:00 - 22:00'
+      },
+      {
+        nombre: 'One Spot Iñaquito',
+        ubicacion: [-0.1769, -78.4805],
+        precio: '$1.50 por hora',
+        horario: '24 horas'
+      },
+      {
+        nombre: 'One Spot Centro Norte',
+        ubicacion: [-0.1962, -78.4890],
+        precio: '$1.20 por hora',
+        horario: '08:00 - 21:00'
+      }
+    ];
+
+    parqueaderos.forEach((parqueadero) => {
+      L.marker(parqueadero.ubicacion)
+        .addTo(map)
+        .bindPopup(`
+          <strong>${parqueadero.nombre}</strong><br>
+          Precio: ${parqueadero.precio}<br>
+          Horario: ${parqueadero.horario}
+        `);
+    });
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        map.invalidateSize();
+      }, 300);
+    });
+  </script>
+</body>
+</html>
+
